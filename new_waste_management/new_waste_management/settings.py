@@ -52,7 +52,7 @@ INSTALLED_APPS = [
 ]
 DATABASES = {
     'default': dj_database_url.config(
-        default='postgres://postgres:Rach03$%@localhost:5432/waste_db',
+        default='postgresql://waste_db_user:HZQxwfs5VU1kOmwqOJLRVRcgNI4Inf2Y@dpg-d0s7rgi4d50c73bckpc0-a.oregon-postgres.render.com/waste_db',
         conn_max_age=600,
         ssl_require=True,
     )
