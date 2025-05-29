@@ -1,0 +1,296 @@
+[
+    {
+        "model": "educ.quizquestion",
+        "fields": {
+            "question": "Where should aluminum cans go?",
+            "correct_answer": "metal",
+            "wrong_answer_1": "plastic",
+            "wrong_answer_2": "paper",
+            "explanation": "Aluminum cans are 100% recyclable and should go in metal recycling."
+        }
+    },
+    {
+        "model": "educ.quizquestion",
+        "fields": {
+            "question": "What should you do with old batteries?",
+            "correct_answer": "hazardous",
+            "wrong_answer_1": "e-waste",
+            "wrong_answer_2": "metal",
+            "explanation": "Batteries contain toxic chemicals and should be disposed of as hazardous waste."
+        }
+    },
+    {
+        "model": "educ.quizquestion",
+        "fields": {
+            "question": "Where should you put food scraps?",
+            "correct_answer": "organic",
+            "wrong_answer_1": "plastic",
+            "wrong_answer_2": "paper",
+            "explanation": "Food waste should be composted as organic waste."
+        }
+    },
+    {
+        "model": "educ.quizquestion",
+        "fields": {
+            "question": "What bin should glass bottles go in?",
+            "correct_answer": "glass",
+            "wrong_answer_1": "plastic",
+            "wrong_answer_2": "metal",
+            "explanation": "Glass should be recycled separately as it's infinitely recyclable."
+        }
+    },
+    {
+        "model": "educ.quizquestion",
+        "fields": {
+            "question": "Where do old mobile phones belong?",
+            "correct_answer": "e-waste",
+            "wrong_answer_1": "metal",
+            "wrong_answer_2": "plastic",
+            "explanation": "Electronics contain valuable materials that can be recovered through proper e-waste recycling."
+        }
+    },
+    {
+        "model": "educ.quizquestion",
+        "fields": {
+            "question": "What should you do with old clothes in good condition?",
+            "correct_answer": "clothing",
+            "wrong_answer_1": "organic",
+            "wrong_answer_2": "paper",
+            "explanation": "Good condition clothing should be donated or recycled through textile recycling programs."
+        }
+    },
+    {
+        "model": "educ.quizquestion",
+        "fields": {
+            "question": "Where should paint cans with leftover paint go?",
+            "correct_answer": "hazardous",
+            "wrong_answer_1": "metal",
+            "wrong_answer_2": "construction",
+            "explanation": "Paint contains chemicals that make it hazardous waste, even if the can is metal."
+        }
+    },
+    {
+        "model": "educ.quizquestion",
+        "fields": {
+            "question": "What should you do with broken concrete pieces?",
+            "correct_answer": "construction",
+            "wrong_answer_1": "hazardous",
+            "wrong_answer_2": "metal",
+            "explanation": "Construction waste like concrete should be taken to special recycling facilities."
+        }
+    },
+    {
+        "model": "educ.quizquestion",
+        "fields": {
+            "question": "Where should used syringes be disposed?",
+            "correct_answer": "medical",
+            "wrong_answer_1": "hazardous",
+            "wrong_answer_2": "plastic",
+            "explanation": "Medical sharps require special disposal to prevent injury and infection."
+        }
+    },
+    {
+        "model": "educ.quizquestion",
+        "fields": {
+            "question": "What should you do with pizza boxes with grease stains?",
+            "correct_answer": "organic",
+            "wrong_answer_1": "paper",
+            "wrong_answer_2": "plastic",
+            "explanation": "Grease-contaminated paper can't be recycled and should be composted."
+        }
+    },
+
+  {
+    "model": "educ.quizquestion",
+    "fields": {
+      "question": "Where should expired medications be disposed?",
+      "correct_answer": "medical",
+      "wrong_answer_1": "organic",
+      "wrong_answer_2": "plastic",
+      "explanation": "Expired medicines should be returned to pharmacies or disposed of as medical waste."
+    }
+  },
+  {
+    "model": "educ.quizquestion",
+    "fields": {
+      "question": "How should cooking oil be disposed?",
+      "correct_answer": "hazardous",
+      "wrong_answer_1": "organic",
+      "wrong_answer_2": "e-waste",
+      "explanation": "Used oil can clog systems and should be taken to hazardous waste collection centers."
+    }
+  },
+  {
+    "model": "educ.quizquestion",
+    "fields": {
+      "question": "What bin do tin foil sheets go in?",
+      "correct_answer": "metal",
+      "wrong_answer_1": "plastic",
+      "wrong_answer_2": "paper",
+      "explanation": "Clean tin foil is recyclable as metal."
+    }
+  },
+  {
+    "model": "educ.quizquestion",
+    "fields": {
+      "question": "Where do shredded paper scraps go?",
+      "correct_answer": "paper",
+      "wrong_answer_1": "organic",
+      "wrong_answer_2": "plastic",
+      "explanation": "Shredded paper is recyclable but often needs special collection."
+    }
+  },
+  {
+    "model": "educ.quizquestion",
+    "fields": {
+      "question": "What should you do with used tissues?",
+      "correct_answer": "organic",
+      "wrong_answer_1": "paper",
+      "wrong_answer_2": "plastic",
+      "explanation": "Used tissues are not recyclable and belong in compost if possible."
+    }
+  },
+  {
+    "model": "educ.quizquestion",
+    "fields": {
+      "question": "Where do plastic bottle caps belong?",
+      "correct_answer": "plastic",
+      "wrong_answer_1": "metal",
+      "wrong_answer_2": "paper",
+      "explanation": "Plastic caps should be tightly screwed on bottles and recycled together."
+    }
+  },
+  {
+    "model": "educ.quizquestion",
+    "fields": {
+      "question": "What bin should cardboard boxes go in?",
+      "correct_answer": "paper",
+      "wrong_answer_1": "organic",
+      "wrong_answer_2": "plastic",
+      "explanation": "Clean, dry cardboard belongs in the paper recycling bin."
+    }
+  },
+  {
+    "model": "educ.quizquestion",
+    "fields": {
+      "question": "Where should light bulbs go?",
+      "correct_answer": "hazardous",
+      "wrong_answer_1": "glass",
+      "wrong_answer_2": "metal",
+      "explanation": "Some bulbs contain mercury and should be disposed of as hazardous waste."
+    }
+  },
+  {
+    "model": "educ.quizquestion",
+    "fields": {
+      "question": "Where should plastic bags go?",
+      "correct_answer": "plastic",
+      "wrong_answer_1": "paper",
+      "wrong_answer_2": "organic",
+      "explanation": "Plastic bags can be recycled but usually at special collection points."
+    }
+  },
+  {
+    "model": "educ.quizquestion",
+    "fields": {
+      "question": "What should you do with juice boxes (Tetra Pak)?",
+      "correct_answer": "organic",
+      "wrong_answer_1": "plastic",
+      "wrong_answer_2": "metal",
+      "explanation": "Tetra Pak cartons are multi-layered and require special composite recycling."
+    }
+  },
+  {
+    "model": "educ.quizquestion",
+    "fields": {
+      "question": "Where should old CDs or DVDs go?",
+      "correct_answer": "e-waste",
+      "wrong_answer_1": "plastic",
+      "wrong_answer_2": "paper",
+      "explanation": "Optical discs fall under e-waste due to data content and material."
+    }
+  },
+  {
+    "model": "educ.quizquestion",
+    "fields": {
+      "question": "What bin do paper towels belong in?",
+      "correct_answer": "organic",
+      "wrong_answer_1": "paper",
+      "wrong_answer_2": "plastic",
+      "explanation": "Used paper towels go to compost since they're often contaminated."
+    }
+  },
+  {
+    "model": "educ.quizquestion",
+    "fields": {
+      "question": "Where should milk cartons go?",
+      "correct_answer": "organic",
+      "wrong_answer_1": "plastic",
+      "wrong_answer_2": "paper",
+      "explanation": "Milk cartons are multi-layered and need special recycling."
+    }
+  },
+  {
+    "model": "educ.quizquestion",
+    "fields": {
+      "question": "What should you do with broken ceramic plates?",
+      "correct_answer": "construction",
+      "wrong_answer_1": "glass",
+      "wrong_answer_2": "metal",
+      "explanation": "Ceramics are not recyclable in normal streams and go to construction waste."
+    }
+  },
+  {
+    "model": "educ.quizquestion",
+    "fields": {
+      "question": "Where do ink cartridges go?",
+      "correct_answer": "e-waste",
+      "wrong_answer_1": "hazardous",
+      "wrong_answer_2": "plastic",
+      "explanation": "Cartridges contain electronic components and ink—handle as e-waste."
+    }
+  },
+  {
+    "model": "educ.quizquestion",
+    "fields": {
+      "question": "Where do large styrofoam packaging pieces go?",
+      "correct_answer": "plastic",
+      "wrong_answer_1": "paper",
+      "wrong_answer_2": "glass",
+      "explanation": "Styrofoam is recyclable plastic but often excluded in curbside bins."
+    }
+  },
+  {
+    "model": "educ.quizquestion",
+    "fields": {
+      "question": "Where should tree branches be disposed?",
+      "correct_answer": "organic",
+      "wrong_answer_1": "construction",
+      "wrong_answer_2": "hazardous",
+      "explanation": "Yard waste like branches should be composted or collected as organic waste."
+    }
+  },
+  {
+    "model": "educ.quizquestion",
+    "fields": {
+      "question": "What should you do with broken mirrors?",
+      "correct_answer": "construction",
+      "wrong_answer_1": "glass",
+      "wrong_answer_2": "metal",
+      "explanation": "Mirrors are treated glass and can't go in normal glass bins."
+    }
+  },
+  {
+    "model": "educ.quizquestion",
+    "fields": {
+      "question": "Where should makeup containers go?",
+      "correct_answer": "plastic",
+      "wrong_answer_1": "hazardous",
+      "wrong_answer_2": "organic",
+      "explanation": "Empty plastic makeup containers should go in plastic recycling if clean."
+    }
+  }
+]
+
+
+ 

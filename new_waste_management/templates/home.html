@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="max-w-4xl mx-auto mt-12 p-6 bg-white rounded-lg shadow-lg text-center">
+  <h1 class="text-5xl font-extrabold text-green-700 mb-4">Welcome to NEMA Waste Platform</h1>
+  <p class="text-lg text-gray-700 mb-6">
+    Empowering communities to report, manage, and reduce illegal dumping for a cleaner environment.
+  </p>
+
+  <div class="space-y-4">
+    <!-- Full registration -->
+    <a href="{% url 'register' %}" 
+       class="block bg-blue-600 text-white px-6 py-3 rounded shadow hover:bg-blue-700 transition">
+      Full Registration (Households, Collectors, Businesses)
+    </a>
+
+    <!-- Quick registration -->
+    <a href="{% url 'quick_register' %}" 
+       class="block bg-green-600 text-white px-6 py-3 rounded shadow hover:bg-green-700 transition">
+      Quick Access (Quizzes, Learn, Report Dumping)
+    </a>
+
+    <!-- Direct report button -->
+    <a href="{% url 'report_dumping' %}" 
+       class="block bg-yellow-600 text-white px-6 py-3 rounded shadow hover:bg-yellow-700 transition">
+      Report Illegal Dumping Now
+    </a>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="container mx-auto mt-8 px-4 max-w-4xl">
+    <h2 class="text-3xl font-extrabold text-green-800 mb-8 text-center">Waste Matches</h2>
+
+    {% if matches %}
+        <div class="space-y-8">
+            {% for match in matches %}
+                <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition duration-300">
+                    <h3 class="text-xl font-semibold text-green-700 mb-4 border-b border-green-300 pb-2">Listing Details</h3>
+                    
+                    <div class="mb-4 text-gray-700 space-y-1">
+                        <p><strong>Type:</strong> <span class="capitalize">{{ match.listing.waste_type }}</span></p>
+                        <p>
+                            <strong>Details:</strong>
+                            {% if match.listing.description %}
+                                {{ match.listing.description }}
+                            {% else %}
+                                {{ match.listing.quantity }}
+                            {% endif %}
+                        </p>
+                        <p><strong>Location:</strong> {{ match.listing.location }}</p>
+                        <p><strong>Listed by:</strong> {{ match.listing.user.username }}</p>
+
+                        {% if match.listing.image %}
+                            <div class="mt-3">
+                                <strong>Image:</strong><br>
+                                <img src="{{ match.listing.image.url }}" alt="Waste Image" class="max-w-xs rounded-md shadow-sm mt-2 border border-gray-200">
+                                <!-- Debug info -->
+                                <p class="text-sm text-gray-400 mt-1">URL: {{ match.listing.image.url }}</p>
+                            </div>
+                        {% else %}
+                            <p class="text-sm text-gray-500 italic">No image available.</p>
+                        {% endif %}
+                    </div>
+
+                    {% if user.profile.user_type == 'household' or user.profile.user_type == 'business' %}
+                        <h4 class="text-lg font-semibold text-green-700 mb-3 border-b border-green-200 pb-1">Matched Collectors</h4>
+                        {% if match.collectors %}
+                            <ul class="list-disc list-inside space-y-2 text-gray-800">
+                                {% for collector in match.collectors %}
+                                    <li>
+                                        <p><strong>Collector:</strong> {{ collector.user.username }}</p>
+                                        <p><strong>Contact:</strong> {{ collector.contact|default:"Not provided" }}</p>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        {% else %}
+                            <p class="text-gray-500 italic">No collectors matched yet.</p>
+                        {% endif %}
+                    {% else %}
+                        <h4 class="text-lg font-semibold text-green-700 mb-3 border-b border-green-200 pb-1">Listing Owner Details</h4>
+                        {% if match.listing_owner %}
+                            <ul class="list-disc list-inside text-gray-800">
+                                <li>
+                                    <p><strong>Name:</strong> {{ match.listing_owner.user.username }}</p>
+                                    <p><strong>Contact:</strong> {{ match.listing_owner.contact|default:"Not provided" }}</p>
+                                </li>
+                            </ul>
+                        {% else %}
+                            <p class="text-gray-500 italic">No listing owner details available.</p>
+                        {% endif %}
+                    {% endif %}
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p class="text-center text-gray-500 text-lg mt-12 italic">No matches found.</p>
+    {% endif %}
+</div>
+{% endblock %}
