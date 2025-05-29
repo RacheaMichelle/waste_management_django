@@ -1,60 +1,92 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="min-h-screen bg-gradient-to-b from-green-50 to-green-100 py-12 px-6">
-  <div class="max-w-6xl mx-auto">
-    <h2 class="text-4xl font-extrabold text-green-800 mb-12 text-center tracking-tight">
-      Educational Resources on Waste Management
-    </h2>
+<div class="min-h-screen bg-gradient-to-b from-green-50 to-white py-12 px-4 sm:px-6 lg:px-8">
+  <div class="max-w-7xl mx-auto">
+    <div class="text-center mb-16">
+      <h2 class="text-4xl font-extrabold text-green-900 mb-4 tracking-tight">
+        Waste Management Resources
+      </h2>
+      <p class="text-xl text-green-700 max-w-3xl mx-auto">
+        Discover how to properly manage different types of waste and transform them into valuable products
+      </p>
+    </div>
 
     {% if resources %}
       {% regroup resources by waste_type as grouped_resources %}
 
-      <div class="space-y-12">
+      <div class="space-y-16">
         {% for group in grouped_resources %}
-          <section class="bg-white rounded-xl shadow-lg p-8">
-            <h3 class="text-3xl font-semibold text-green-700 mb-6 border-b-4 border-green-300 pb-3 tracking-wide">
-              {{ group.grouper|title }} Waste
-            </h3>
+          <section class="bg-white rounded-2xl shadow-xl overflow-hidden">
+            <div class="bg-green-700 px-8 py-4">
+              <h3 class="text-2xl font-bold text-white">
+                {{ group.grouper|title }} Waste Resources
+              </h3>
+            </div>
             
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-              {% for resource in group.list %}
-                <article class="bg-green-50 rounded-lg p-6 shadow hover:shadow-xl transition duration-300">
-                  <h4 class="text-xl font-bold text-green-800 mb-3">{{ resource.title }}</h4>
-                  <p class="text-sm font-semibold text-green-700 mb-2">
-                    Category: <span class="capitalize">{{ resource.category }}</span>
-                  </p>
-                  
-                  <div class="text-gray-700 text-sm space-y-2 mb-4 leading-relaxed">
-                    <p><strong>How to Recycle:</strong> {{ resource.recycling_process }}</p>
-                    <p><strong>Products Made:</strong> {{ resource.products_made }}</p>
-                    <p><strong>How to Make These Products:</strong> {{ resource.making_process }}</p>
-                  </div>
+            <div class="p-6">
+              <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+                {% for resource in group.list %}
+                  <article class="border border-green-200 rounded-lg overflow-hidden hover:shadow-lg transition duration-300">
+                    <div class="p-6">
+                      <div class="flex items-center mb-4">
+                        <span class="bg-green-100 text-green-800 text-xs font-semibold px-3 py-1 rounded-full">
+                          {{ resource.category|title }}
+                        </span>
+                      </div>
+                      
+                      <h4 class="text-xl font-bold text-gray-900 mb-3">{{ resource.title }}</h4>
+                      
+                      <div class="space-y-3 text-gray-700">
+                        <div>
+                          <h5 class="font-semibold text-green-700">Recycling Process:</h5>
+                          <p>{{ resource.recycling_process }}</p>
+                        </div>
+                        
+                        <div>
+                          <h5 class="font-semibold text-green-700">Products Made:</h5>
+                          <p>{{ resource.products_made }}</p>
+                        </div>
+                        
+                        <div>
+                          <h5 class="font-semibold text-green-700">Production Guide:</h5>
+                          <p>{{ resource.making_process }}</p>
+                        </div>
+                      </div>
 
-                  {% if resource.tutorial_links %}
-                    <div class="mt-4">
-                      <p class="font-semibold text-green-700 mb-2">Watch a Tutorial:</p>
-                      <ul class="list-disc list-inside space-y-1">
-                        {% for link in resource.tutorial_links %}
-                          <li>
-                            <a href="{{ link }}" target="_blank" rel="noopener noreferrer"
-                               class="text-blue-600 hover:text-blue-800 hover:underline font-medium">
-                              YouTube Video{% if resource.tutorial_links|length > 1 %} ({{ forloop.counter }}){% endif %}
-                            </a>
-                          </li>
-                        {% endfor %}
-                      </ul>
+                      {% if resource.tutorial_links %}
+                        <div class="mt-6 pt-4 border-t border-gray-100">
+                          <h5 class="font-semibold text-green-700 mb-2">Video Tutorials:</h5>
+                          <div class="space-y-2">
+                            {% for link in resource.tutorial_links %}
+                              <a href="{{ link }}" target="_blank" rel="noopener noreferrer"
+                                 class="flex items-center text-blue-600 hover:text-blue-800 font-medium">
+                                <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                  <path d="M2 6a2 2 0 012-2h6a2 2 0 012 2v8a2 2 0 01-2 2H4a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v8a2 2 0 01-2 2h-2a2 2 0 01-2-2V6z"></path>
+                                </svg>
+                                Watch here a Video to help you recycle {% if resource.tutorial_links|length > 1 %}({{ forloop.counter }}){% endif %}
+                              </a>
+                            {% endfor %}
+                          </div>
+                        </div>
+                      {% endif %}
                     </div>
-                  {% endif %}
-                </article>
-              {% endfor %}
+                  </article>
+                {% endfor %}
+              </div>
             </div>
           </section>
         {% endfor %}
       </div>
     {% else %}
-      <div class="text-center text-gray-500 text-xl italic mt-20">
-        No resources available yet.
+      <div class="text-center py-20">
+        <div class="mx-auto h-24 w-24 text-green-400">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+        </div>
+        <h3 class="mt-6 text-lg font-medium text-gray-900">No resources available</h3>
+        <p class="mt-1 text-gray-500">Check back later for educational materials on waste management</p>
       </div>
     {% endif %}
   </div>

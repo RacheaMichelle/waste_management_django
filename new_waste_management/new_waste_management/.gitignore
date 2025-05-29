@@ -30,8 +30,6 @@ media/
 .DS_Store
 Thumbs.db
 
-# Render
-render.yaml
 
 # Byte-compiled files
 *.pyc
