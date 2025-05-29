@@ -46,6 +46,8 @@ INSTALLED_APPS = [
     'education',
     'educ',
     'report',
+    'widget_tweaks',
+
     
 ]
 DATABASES = {

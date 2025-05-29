@@ -1,51 +1,70 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="max-w-md mx-auto bg-white p-6 rounded-lg shadow-md">
-    <h1 class="text-2xl font-bold mb-6 text-red-700">Report Illegal Dumping</h1>
-    <form method="post" enctype="multipart/form-data" novalidate>
+<div class="max-w-2xl mx-auto bg-white p-8 rounded-xl shadow-lg border border-gray-100">
+    <div class="text-center mb-8">
+        <h1 class="text-3xl font-bold text-green-700 mb-2">Report Illegal Dumping</h1>
+        <p class="text-gray-600">Help keep Uganda clean by reporting illegal waste disposal</p>
+    </div>
+    
+    <form method="post" enctype="multipart/form-data" novalidate class="space-y-6">
         {% csrf_token %}
         
-        <div class="mb-5">
-            <label for="id_photo" class="block text-gray-700 font-medium mb-2">Photo Evidence</label>
-            <input id="id_photo" type="file" name="photo" accept="image/*" class="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-red-500" required>
+        <!-- Photo Upload -->
+        <div class="space-y-2">
+            <label class="block text-lg font-medium text-gray-700">Photo Evidence</label>
+            <div class="flex items-center justify-center w-full">
+                <label class="flex flex-col w-full h-32 border-4 border-dashed border-green-300 hover:border-green-500 hover:bg-green-50 rounded-lg transition-all cursor-pointer">
+                    <div class="flex flex-col items-center justify-center pt-7">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
+                        </svg>
+                        <p class="pt-1 text-sm text-gray-600">Upload photo evidence</p>
+                    </div>
+                    <input id="id_photo" type="file" name="photo" accept="image/*" class="opacity-0" required>
+                </label>
+            </div>
             {% if form.photo.errors %}
-                <p class="text-red-600 text-sm mt-1">{{ form.photo.errors.0 }}</p>
+                <p class="text-red-500 text-sm">{{ form.photo.errors.0 }}</p>
             {% endif %}
         </div>
         
-        <div class="mb-5">
-            <label for="id_waste_type" class="block text-gray-700 font-medium mb-2">Waste Type</label>
-            <select id="id_waste_type" name="waste_type" class="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-red-500" required>
+        <!-- Waste Type -->
+        <div class="space-y-2">
+            <label for="id_waste_type" class="block text-lg font-medium text-gray-700">Waste Type</label>
+            <select id="id_waste_type" name="waste_type" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 transition">
                 {% for value, label in form.waste_type.field.choices %}
                     <option value="{{ value }}" {% if form.waste_type.value == value %}selected{% endif %}>{{ label }}</option>
                 {% endfor %}
             </select>
         </div>
         
-        <div class="mb-5">
-            <label for="id_district" class="block text-gray-700 font-medium mb-2">District</label>
-            <select id="id_district" name="district" class="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-red-500" required>
+        <!-- District -->
+        <div class="space-y-2">
+            <label for="id_district" class="block text-lg font-medium text-gray-700">District</label>
+            <select id="id_district" name="district" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 transition">
                 {% for value, label in form.district.field.choices %}
                     <option value="{{ value }}" {% if form.district.value == value %}selected{% endif %}>{{ label }}</option>
                 {% endfor %}
             </select>
             {% if form.district.errors %}
-                <p class="text-red-600 text-sm mt-1">{{ form.district.errors.0 }}</p>
+                <p class="text-red-500 text-sm">{{ form.district.errors.0 }}</p>
             {% endif %}
         </div>
         
-        <div class="mb-5">
-            <label for="id_description" class="block text-gray-700 font-medium mb-2">Description</label>
-            <textarea id="id_description" name="description" rows="3" class="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-red-500">{% if form.description.value %}{{ form.description.value }}{% endif %}</textarea>
+        <!-- Description -->
+        <div class="space-y-2">
+            <label for="id_description" class="block text-lg font-medium text-gray-700">Description</label>
+            <textarea id="id_description" name="description" rows="4" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 transition">{% if form.description.value %}{{ form.description.value }}{% endif %}</textarea>
         </div>
         
-        <div class="mb-5">
-            <label class="block text-gray-700 font-medium mb-2">Click on the map to select location:</label>
-            <div id="map" class="h-64 w-full rounded border border-gray-300 bg-gray-50 mb-2"></div>
+        <!-- Map -->
+        <div class="space-y-2">
+            <label class="block text-lg font-medium text-gray-700">Select Location on Map</label>
+            <div id="map" class="h-80 w-full rounded-xl border-2 border-green-300 bg-gray-50"></div>
             <input type="hidden" name="latitude" id="id_latitude" value="{% if form.latitude.value %}{{ form.latitude.value }}{% endif %}" required>
             <input type="hidden" name="longitude" id="id_longitude" value="{% if form.longitude.value %}{{ form.longitude.value }}{% endif %}" required>
-            <p id="location-feedback" class="text-sm text-gray-600 italic">
+            <p id="location-feedback" class="text-sm text-gray-500 italic">
                 {% if form.latitude.value and form.longitude.value %}
                     Current location: {{ form.latitude.value }}, {{ form.longitude.value }}
                 {% else %}
@@ -53,11 +72,12 @@
                 {% endif %}
             </p>
             {% if form.latitude.errors or form.longitude.errors %}
-                <p class="text-red-600 text-sm mt-1">Please select a location on the map</p>
+                <p class="text-red-500 text-sm">Please select a location on the map</p>
             {% endif %}
         </div>
         
-        <button type="submit" class="w-full bg-red-600 hover:bg-red-700 text-white font-semibold py-3 rounded shadow transition">
+        <!-- Submit Button -->
+        <button type="submit" class="w-full py-3 px-6 bg-green-600 hover:bg-green-700 text-white font-bold text-lg rounded-lg shadow-md transition-all transform hover:scale-[1.01]">
             Submit Report
         </button>
     </form>
@@ -96,4 +116,14 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 </script>
+
+<style>
+    .leaflet-container {
+        z-index: 0;
+    }
+    input[type="file"] {
+        height: 0;
+        width: 0;
+    }
+</style>
 {% endblock %}
