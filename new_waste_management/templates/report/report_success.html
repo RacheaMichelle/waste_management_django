@@ -1,0 +1,22 @@
+<!-- report/report_success.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="max-w-md mx-auto bg-white p-6 rounded-lg shadow-md text-center">
+    <h2 class="text-3xl font-extrabold mb-6 text-green-700">Report Submitted!</h2>
+    
+    <div class="mb-6 p-4 bg-green-100 border border-green-300 rounded">
+        <p class="font-semibold text-green-800 mb-1">District notified:</p>
+        <p class="text-green-700 text-lg">{{ report.get_district_display }}</p>
+    </div>
+    
+    <p class="mb-8 text-gray-700 text-lg">
+        Report ID: <strong class="text-gray-900">#{{ report.id }}</strong>
+    </p>
+    
+    <a href="{% url 'report_dumping' %}" 
+       class="inline-block bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded shadow transition">
+        Submit Another Report
+    </a>
+</div>
+{% endblock %}

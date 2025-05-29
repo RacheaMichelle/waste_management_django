@@ -1,0 +1,56 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pyc
+*.pdb
+
+# Environment
+env/
+venv/
+ENV/
+VENV/
+.env
+.env.*
+
+# VSCode
+.vscode/
+
+# Django
+db.sqlite3
+/staticfiles/
+media/
+
+# Logs
+*.log
+*.pot
+
+# System
+.DS_Store
+Thumbs.db
+
+# Render
+render.yaml
+
+# Byte-compiled files
+*.pyc
+
+# Migration backup
+*.bak
+*.swp
+*.tmp
+
+# Pip
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Test output
+htmlcov/
+.coverage
+.tox/
+.pytest_cache/
+
+# Others
+*.sqlite3
+.idea/

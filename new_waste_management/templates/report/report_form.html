@@ -1,0 +1,99 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="max-w-md mx-auto bg-white p-6 rounded-lg shadow-md">
+    <h1 class="text-2xl font-bold mb-6 text-red-700">Report Illegal Dumping</h1>
+    <form method="post" enctype="multipart/form-data" novalidate>
+        {% csrf_token %}
+        
+        <div class="mb-5">
+            <label for="id_photo" class="block text-gray-700 font-medium mb-2">Photo Evidence</label>
+            <input id="id_photo" type="file" name="photo" accept="image/*" class="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-red-500" required>
+            {% if form.photo.errors %}
+                <p class="text-red-600 text-sm mt-1">{{ form.photo.errors.0 }}</p>
+            {% endif %}
+        </div>
+        
+        <div class="mb-5">
+            <label for="id_waste_type" class="block text-gray-700 font-medium mb-2">Waste Type</label>
+            <select id="id_waste_type" name="waste_type" class="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-red-500" required>
+                {% for value, label in form.waste_type.field.choices %}
+                    <option value="{{ value }}" {% if form.waste_type.value == value %}selected{% endif %}>{{ label }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        
+        <div class="mb-5">
+            <label for="id_district" class="block text-gray-700 font-medium mb-2">District</label>
+            <select id="id_district" name="district" class="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-red-500" required>
+                {% for value, label in form.district.field.choices %}
+                    <option value="{{ value }}" {% if form.district.value == value %}selected{% endif %}>{{ label }}</option>
+                {% endfor %}
+            </select>
+            {% if form.district.errors %}
+                <p class="text-red-600 text-sm mt-1">{{ form.district.errors.0 }}</p>
+            {% endif %}
+        </div>
+        
+        <div class="mb-5">
+            <label for="id_description" class="block text-gray-700 font-medium mb-2">Description</label>
+            <textarea id="id_description" name="description" rows="3" class="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-red-500">{% if form.description.value %}{{ form.description.value }}{% endif %}</textarea>
+        </div>
+        
+        <div class="mb-5">
+            <label class="block text-gray-700 font-medium mb-2">Click on the map to select location:</label>
+            <div id="map" class="h-64 w-full rounded border border-gray-300 bg-gray-50 mb-2"></div>
+            <input type="hidden" name="latitude" id="id_latitude" value="{% if form.latitude.value %}{{ form.latitude.value }}{% endif %}" required>
+            <input type="hidden" name="longitude" id="id_longitude" value="{% if form.longitude.value %}{{ form.longitude.value }}{% endif %}" required>
+            <p id="location-feedback" class="text-sm text-gray-600 italic">
+                {% if form.latitude.value and form.longitude.value %}
+                    Current location: {{ form.latitude.value }}, {{ form.longitude.value }}
+                {% else %}
+                    Click on the map to select location
+                {% endif %}
+            </p>
+            {% if form.latitude.errors or form.longitude.errors %}
+                <p class="text-red-600 text-sm mt-1">Please select a location on the map</p>
+            {% endif %}
+        </div>
+        
+        <button type="submit" class="w-full bg-red-600 hover:bg-red-700 text-white font-semibold py-3 rounded shadow transition">
+            Submit Report
+        </button>
+    </form>
+</div>
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const map = L.map('map').setView([1.3733, 32.2903], 7);
+    
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; OpenStreetMap contributors'
+    }).addTo(map);
+
+    let marker;
+    
+    const initialLat = parseFloat(document.getElementById('id_latitude').value);
+    const initialLng = parseFloat(document.getElementById('id_longitude').value);
+    
+    if (initialLat && initialLng) {
+        marker = L.marker([initialLat, initialLng]).addTo(map);
+        map.setView([initialLat, initialLng], 12);
+    }
+    
+    map.on('click', function(e) {
+        if (marker) {
+            map.removeLayer(marker);
+        }
+        marker = L.marker(e.latlng).addTo(map);
+        document.getElementById('id_latitude').value = e.latlng.lat.toFixed(6);
+        document.getElementById('id_longitude').value = e.latlng.lng.toFixed(6);
+        document.getElementById('location-feedback').textContent = 
+            `Selected location: ${e.latlng.lat.toFixed(6)}, ${e.latlng.lng.toFixed(6)}`;
+    });
+});
+</script>
+{% endblock %}

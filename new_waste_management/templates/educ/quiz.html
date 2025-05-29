@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% load quiz_filters %}
+
+{% block content %}
+<form method="post" class="max-w-3xl mx-auto bg-white p-10 rounded-2xl shadow-xl ring-1 ring-gray-200">
+    {% csrf_token %}
+
+    {% for question in page_obj %}
+        <div class="mb-10">
+            <p class="font-extrabold text-2xl text-indigo-600 mb-5">{{ question.question }}</p>
+
+            <label class="flex items-center space-x-4 mb-4 cursor-pointer group">
+                <input
+                    type="radio"
+                    name="{{ question.id }}"
+                    value="{{ question.correct_answer }}"
+                    class="form-radio h-6 w-6 text-green-500 border-green-400 focus:ring-2 focus:ring-green-300 transition duration-300"
+                    {% if request.session.user_answers and request.session.user_answers|get_item:question.id == question.correct_answer %}checked{% endif %}
+                />
+                <span class="text-gray-900 font-semibold group-hover:text-green-600 transition duration-300">{{ question.correct_answer }}</span>
+            </label>
+
+            <label class="flex items-center space-x-4 mb-4 cursor-pointer group">
+                <input
+                    type="radio"
+                    name="{{ question.id }}"
+                    value="{{ question.wrong_answer_1 }}"
+                    class="form-radio h-6 w-6 text-red-500 border-red-400 focus:ring-2 focus:ring-red-300 transition duration-300"
+                    {% if request.session.user_answers and request.session.user_answers|get_item:question.id == question.wrong_answer_1 %}checked{% endif %}
+                />
+                <span class="text-gray-900 font-semibold group-hover:text-red-600 transition duration-300">{{ question.wrong_answer_1 }}</span>
+            </label>
+
+            <label class="flex items-center space-x-4 cursor-pointer group">
+                <input
+                    type="radio"
+                    name="{{ question.id }}"
+                    value="{{ question.wrong_answer_2 }}"
+                    class="form-radio h-6 w-6 text-red-500 border-red-400 focus:ring-2 focus:ring-red-300 transition duration-300"
+                    {% if request.session.user_answers and request.session.user_answers|get_item:question.id == question.wrong_answer_2 %}checked{% endif %}
+                />
+                <span class="text-gray-900 font-semibold group-hover:text-red-600 transition duration-300">{{ question.wrong_answer_2 }}</span>
+            </label>
+        </div>
+    {% endfor %}
+
+    <div class="flex justify-between mt-8">
+        {% if page_obj.has_previous %}
+            <a href="?page={{ page_obj.previous_page_number }}"
+                class="inline-block bg-gray-200 hover:bg-gray-300 text-gray-800 font-semibold px-8 py-3 rounded-xl shadow-sm transition duration-300">
+                ← Previous
+            </a>
+        {% else %}
+            <span class="inline-block px-8 py-3 text-gray-400 cursor-not-allowed">← Previous</span>
+        {% endif %}
+
+        {% if page_obj.has_next %}
+            <button type="submit"
+                class="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-8 py-3 rounded-xl shadow-lg transition duration-300">
+                Next →
+            </button>
+        {% else %}
+            <button type="submit"
+                class="bg-green-600 hover:bg-green-700 text-white font-semibold px-8 py-3 rounded-xl shadow-lg transition duration-300">
+                Submit
+            </button>
+        {% endif %}
+    </div>
+</form>
+{% endblock %}

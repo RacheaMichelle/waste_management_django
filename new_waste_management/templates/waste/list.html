@@ -1,0 +1,135 @@
+{% extends 'base.html' %}
+
+{% block styles %}
+<style>
+  form input[type="text"],
+  form input[type="number"],
+  form input[type="file"],
+  form select,
+  form textarea {
+    width: 100%;
+    padding: 0.5rem 0.75rem;
+    border: 1.5px solid #cbd5e0;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    font-family: inherit;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    box-sizing: border-box;
+  }
+
+  form input[type="text"]:focus,
+  form input[type="number"]:focus,
+  form input[type="file"]:focus,
+  form select:focus,
+  form textarea:focus {
+    outline: none;
+    border-color: #16a34a;
+    box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.3);
+  }
+
+  form label {
+    color: #374151;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+    display: block;
+    font-size: 1rem;
+  }
+
+  form .text-red-600 {
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+  }
+
+  form button[type="submit"] {
+    font-weight: 600;
+    font-size: 1.125rem;
+    border-radius: 0.5rem;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  form button[type="submit"]:hover {
+    background-color: #15803d;
+    box-shadow: 0 6px 12px rgba(21, 128, 61, 0.5);
+  }
+
+  .max-w-lg {
+    max-width: 32rem;
+  }
+
+  .bg-white {
+    background-color: #ffffff;
+  }
+
+  .rounded-lg {
+    border-radius: 0.75rem;
+  }
+
+  .shadow-lg {
+    box-shadow:
+      0 10px 15px -3px rgba(0, 0, 0, 0.1),
+      0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  }
+
+  .mt-10 {
+    margin-top: 2.5rem;
+  }
+
+  .p-8 {
+    padding: 2rem;
+  }
+
+  .text-green-700 {
+    color: #047857;
+  }
+
+  .text-center {
+    text-align: center;
+  }
+
+  .space-y-6 > * + * {
+    margin-top: 1.5rem;
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="max-w-lg mx-auto mt-10 p-8 bg-white rounded-lg shadow-lg">
+    <h2 class="text-3xl font-bold mb-8 text-green-700 text-center">Create Waste Listing for each waste type that you have/collect</h2>
+    <form method="post" enctype="multipart/form-data" class="space-y-6">
+        {% csrf_token %}
+        
+        <div class="form-group">
+            <label for="id_waste_type" class="block mb-2 font-semibold text-gray-700">Waste Type:</label>
+            {{ form.waste_type }}
+        </div>
+        
+        <div class="form-group">
+            <label for="id_quantity" class="block mb-2 font-semibold text-gray-700">Quantity:</label>
+            {{ form.quantity }}
+            {% if form.quantity.errors %}
+                <div class="text-red-600 mt-1 text-sm">{{ form.quantity.errors }}</div>
+            {% endif %}
+        </div>
+        
+        <div class="form-group">
+            <label for="id_description" class="block mb-2 font-semibold text-gray-700">Description:</label>
+            {{ form.description }}
+        </div>
+        
+        <div class="form-group">
+            <label for="id_location" class="block mb-2 font-semibold text-gray-700">Location:</label>
+            {{ form.location }}
+        </div>
+        
+        <div class="form-group">
+            <label for="id_image" class="block mb-2 font-semibold text-gray-700">Image (optional):</label>
+            {{ form.image }}
+        </div>
+        
+        <button type="submit" class="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-3 rounded transition duration-300">
+            Create Listing
+        </button>
+    </form>
+</div>
+{% endblock %}

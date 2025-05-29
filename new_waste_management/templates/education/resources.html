@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="min-h-screen bg-gradient-to-b from-green-50 to-green-100 py-12 px-6">
+  <div class="max-w-6xl mx-auto">
+    <h2 class="text-4xl font-extrabold text-green-800 mb-12 text-center tracking-tight">
+      Educational Resources on Waste Management
+    </h2>
+
+    {% if resources %}
+      {% regroup resources by waste_type as grouped_resources %}
+
+      <div class="space-y-12">
+        {% for group in grouped_resources %}
+          <section class="bg-white rounded-xl shadow-lg p-8">
+            <h3 class="text-3xl font-semibold text-green-700 mb-6 border-b-4 border-green-300 pb-3 tracking-wide">
+              {{ group.grouper|title }} Waste
+            </h3>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+              {% for resource in group.list %}
+                <article class="bg-green-50 rounded-lg p-6 shadow hover:shadow-xl transition duration-300">
+                  <h4 class="text-xl font-bold text-green-800 mb-3">{{ resource.title }}</h4>
+                  <p class="text-sm font-semibold text-green-700 mb-2">
+                    Category: <span class="capitalize">{{ resource.category }}</span>
+                  </p>
+                  
+                  <div class="text-gray-700 text-sm space-y-2 mb-4 leading-relaxed">
+                    <p><strong>How to Recycle:</strong> {{ resource.recycling_process }}</p>
+                    <p><strong>Products Made:</strong> {{ resource.products_made }}</p>
+                    <p><strong>How to Make These Products:</strong> {{ resource.making_process }}</p>
+                  </div>
+
+                  {% if resource.tutorial_links %}
+                    <div class="mt-4">
+                      <p class="font-semibold text-green-700 mb-2">Watch a Tutorial:</p>
+                      <ul class="list-disc list-inside space-y-1">
+                        {% for link in resource.tutorial_links %}
+                          <li>
+                            <a href="{{ link }}" target="_blank" rel="noopener noreferrer"
+                               class="text-blue-600 hover:text-blue-800 hover:underline font-medium">
+                              YouTube Video{% if resource.tutorial_links|length > 1 %} ({{ forloop.counter }}){% endif %}
+                            </a>
+                          </li>
+                        {% endfor %}
+                      </ul>
+                    </div>
+                  {% endif %}
+                </article>
+              {% endfor %}
+            </div>
+          </section>
+        {% endfor %}
+      </div>
+    {% else %}
+      <div class="text-center text-gray-500 text-xl italic mt-20">
+        No resources available yet.
+      </div>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}
